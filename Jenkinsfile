@@ -15,11 +15,13 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git branch: "${BRANCH}",
-                    url: 'https://github.com/vishalrathi00/vishalrathi00.git>/<repo>.git'
-            }
+       stage('Checkout Code') {
+    steps {
+        git branch: 'main',
+            credentialsId: 'github-creds',
+            url: 'https://github.com/vishalrathi00/vishalrathi00.git'
+    }
+}
         }
 
         stage('Docker Login, Build & Push') {
