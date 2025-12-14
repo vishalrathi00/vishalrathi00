@@ -34,9 +34,8 @@ pipeline {
                 ]) {
                     sh '''
                         docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-                        cd vote
-                        docker build -t vishal9756/vote:v${BUILD_NUMBER} .
-                        docker push vishal9756/vote:v${BUILD_NUMBER}
+                        docker build -t vishal9756/vishalrathi00:v${BUILD_NUMBER} .
+                        docker push vishal9756/vishalrathi00:v${BUILD_NUMBER}
                     '''
                 }
             }
@@ -44,7 +43,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "Deploying to ${ENV}"
+                echo "Deploying to ${ENV} environment"
             }
         }
     }
