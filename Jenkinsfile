@@ -15,13 +15,12 @@ pipeline {
 
     stages {
 
-       stage('Checkout Code') {
-    steps {
-        git branch: 'main',
-            credentialsId: 'github-creds',
-            url: 'https://github.com/vishalrathi00/vishalrathi00.git'
-    }
-}
+        stage('Checkout Code') {
+            steps {
+                git branch: "${BRANCH}",
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/vishalrathi00/vishalrathi00.git'
+            }
         }
 
         stage('Docker Login, Build & Push') {
@@ -29,15 +28,15 @@ pipeline {
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'dockerhub-creds',
-                        usernameVariable: 'vishal9756',
-                        passwordVariable: 'Circle9012'
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
                     )
                 ]) {
                     sh '''
-                        docker login -u "$vishal9756" -p "$Circle9012"
+                        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
                         cd vote
-                        docker build -t vishalrathi00/vishalrathi00.git/vote:v${BUILD_NUMBER} .
-                        docker push docker push vishal9756/vote:v${BUILD_NUMBER}
+                        docker build -t vishal9756/vote:v${BUILD_NUMBER} .
+                        docker push vishal9756/vote:v${BUILD_NUMBER}
                     '''
                 }
             }
