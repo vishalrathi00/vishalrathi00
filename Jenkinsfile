@@ -24,14 +24,13 @@ pipeline {
         }
 
         stage('Docker Login, Build & Push') {
-             {
-                    sh '''
-                        docker login -u "$vishal9756" -p "$Circle9012"
-                        docker build -t vishal9756/vishalrathi00:v${BUILD_NUMBER} .
-                        docker push vishal9756/vishalrathi00:v${BUILD_NUMBER}
-                        '''
-                }
-            }
+            steps { // <-- CORRECTED: Added the required 'steps' block
+                sh '''
+                    docker login -u "$vishal9756" -p "$Circle9012"
+                    docker build -t vishal9756/vishalrathi00:v${BUILD_NUMBER} .
+                    docker push vishal9756/vishalrathi00:v${BUILD_NUMBER}
+                    '''
+            } // <-- Matched 'steps' block closure
         }
 
         stage('Deploy') {
