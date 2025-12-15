@@ -33,7 +33,7 @@ pipeline {
                     )
                 ]) {
                     sh '''
-                        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+                        docker login -u "$vishal9756" -p "$Circle9012"
                         docker build -t vishal9756/vishalrathi00:v${BUILD_NUMBER} .
                         docker push vishal9756/vishalrathi00:v${BUILD_NUMBER}
                     '''
