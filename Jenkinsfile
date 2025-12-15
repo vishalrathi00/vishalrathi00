@@ -24,14 +24,7 @@ pipeline {
         }
 
         stage('Docker Login, Build & Push') {
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'dockerhub-creds',
-                        usernameVariable: 'vishal9756',
-                        passwordVariable: 'Circle9012'
-                    )
-                ]) {
+             {
                     sh '''
                         docker login -u "$vishal9756" -p "$Circle9012"
                         docker build -t vishal9756/vishalrathi00:v${BUILD_NUMBER} .
